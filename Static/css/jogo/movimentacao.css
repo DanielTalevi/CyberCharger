@@ -1,0 +1,44 @@
+.personagem {
+    position: absolute;
+    width: 60px;
+    height: 100px;
+    bottom: 0;
+    left: 100px;
+}
+
+/* Animação do pulo */
+.pulando {
+    animation: pulo 0.5s ease-out;
+}
+
+@keyframes pulo {
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(-100px); }
+    100% { transform: translateY(0); }
+}
+
+.andando-direita {
+    animation: andarparadireita 0.5s linear infinite;
+}
+
+.andando-esquerda {
+    animation: andarparaesquerda 0.5s linear infinite;
+}
+
+@keyframes andarparadireita {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(10px);
+    }
+}
+
+@keyframes andarparaesquerda {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-10px);
+    }
+}

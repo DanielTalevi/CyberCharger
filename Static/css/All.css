@@ -1,0 +1,62 @@
+:root {
+  /* ==============================
+     Synthwave Circuit
+  ============================== */
+  --synthwave-purple-dark: #120A3A;
+  --synthwave-magenta: #FF3B7F;
+  --synthwave-cyan: #00F5D4;
+  --synthwave-amber: #FFD166;
+  --synthwave-blue-purple: #2D1B69;
+
+  /* ==============================
+     Metro Vapor
+  ============================== */
+  --metro-black-blue: #101820;
+  --metro-cyan: #2EC4B6;
+  --metro-red: #E71D36;
+  --metro-orange: #FF9F1C;
+  --metro-light-gray: #F6F7F8;
+
+  /* ==============================
+     Data Heist
+  ============================== */
+  --heist-black: #070A0F;
+  --heist-cyan: #00F0FF;
+  --heist-neon-green: #00FF6A;
+  --heist-pink: #FF2E88;
+  --heist-metallic-gray: #9AA5B1;
+
+  /* ==============================
+     Paleta Clássica (Color-Hex)
+  ============================== */
+  --classic-neon-green: #00FF9F;
+  --classic-cyan: #00B8FF;
+  --classic-electric-blue: #001EFF;
+  --classic-purple: #BD00FF;
+  --classic-violet: #D600FF;
+}
+
+
+/*Criando estilos para a topbar*/
+
+topbar {
+  width: 92%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--synthwave-purple-dark);
+  padding: 10px 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+}
+
+topbar .button {
+  background-color: var(--classic-purple);
+  color: var(--heist-neon-green);
+  border: 2px solid var(--heist-neon-green);
+  padding: 2px 50px;
+  margin: 0 5px;
+  cursor: pointer;
+  border-radius: 22px;
+  transition: background-color 0.3s ease;
+}

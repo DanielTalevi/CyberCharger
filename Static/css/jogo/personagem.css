@@ -1,0 +1,40 @@
+.personagem {
+    position: absolute;
+    width: 60px;
+    height: 100px;
+}
+
+.cabeca {
+    width: 35px;
+    height: 35px;
+    background: #FFD166;
+    border-radius: 8px;
+    margin: auto;
+}
+
+.corpo {
+    width: 45px;
+    height: 35px;
+    background: #00F5D4;
+    margin: auto;
+    border-radius: 6px;
+}
+
+.braco {
+    width: 60px;
+    height: 10px;
+    background: #FF3B7F;
+    position: absolute;
+    top: 42px;
+    border-radius: 5px;
+}
+
+.perna {
+    width: 12px;
+    height: 30px;
+    background: #2D1B69;
+    position: absolute;
+    bottom: 0;
+    left: 12px;
+    box-shadow: 24px 0 #2D1B69;
+}
