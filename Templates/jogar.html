@@ -1,20 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Meu jogo de plataforma</title>
+
     <link rel="stylesheet" href="../Static/css/All.css">
     <link rel="stylesheet" href="../Static/css/jogo/personagem.css">
     <link rel="stylesheet" href="../Static/css/jogo/movimentacao.css">
+
 </head>
+
 <body>
-    <div class="personagem">
-    <div class="cabeca"></div>
-    <div class="corpo"></div>
-    <div class="braco"></div>
-    <div class="perna"></div>
-</div>
-<script src="../Static/js/jogo/Movimentacao.js"></script>
+
+    <main class="jogo" id="jogo">
+
+        <!-- Interface do jogo -->
+        <div class="hud">
+            <span>FASE 1</span>
+
+            <span>
+                Vidas: <strong id="vidas">3</strong>
+            </span>
+        </div>
+
+        <!-- Personagem -->
+        <div class="personagem" id="personagem">
+            <div class="cabeca"></div>
+            <div class="corpo"></div>
+            <div class="braco"></div>
+            <div class="perna"></div>
+        </div>
+
+        <!-- Plataformas suspensas -->
+        <div class="plataforma"
+             style="left: 180px; bottom: 110px; width: 140px;">
+        </div>
+
+        <div class="plataforma"
+             style="left: 400px; bottom: 180px; width: 140px;">
+        </div>
+
+        <div class="plataforma"
+             style="left: 590px; bottom: 100px; width: 100px;">
+        </div>
+
+        <!-- Chão -->
+        <div class="chao" id="chao"></div>
+
+    </main>
+
+    <script src="../Static/js/jogo/Movimentacao.js"></script>
+    <script src="../Static/js/jogo/Fisica.js"></script>
 </body>
-</html>
