@@ -1,62 +1,48 @@
 
+window.controlesJogo = {
+    esquerda: false,
+    direita: false,
+    puloSolicitado: false
+};
 
-const personagem = document.querySelector(".personagem");
+document.addEventListener("keydown", function (evento) {
+    const tecla = evento.key.toLowerCase();
 
-//pulo 
+    if (["a", "d", "w", " "].includes(tecla)) {
+        evento.preventDefault();
+    }
 
-document.addEventListener("keydown", (event) => {
-    if (event.key.toLowerCase() === "w") {
-        personagem.classList.add("pulando");
+    if (tecla === "a" || tecla === "arrowleft") {
+        window.controlesJogo.esquerda = true;
+    }
+
+    if (tecla === "d" || tecla === "arrowright") {
+        window.controlesJogo.direita = true;
+    }
+
+    if (
+        (tecla === "w" ||
+        tecla === "arrowup" ||
+        tecla === " ") &&
+        !evento.repeat
+    ) {
+        window.controlesJogo.puloSolicitado = true;
     }
 });
 
-personagem.addEventListener("animationend", () => {
-    personagem.classList.remove("pulando");
-});
+document.addEventListener("keyup", function (evento) {
+    const tecla = evento.key.toLowerCase();
 
-//dash - avanço
+    if (tecla === "a" || tecla === "arrowleft") {
+        window.controlesJogo.esquerda = false;
+    }
 
-document.addEventListener("keydown", (event) => {
-    if (event.key.toLowerCase() === " ") {
-        console.log("Dash!");
+    if (tecla === "d" || tecla === "arrowright") {
+        window.controlesJogo.direita = false;
     }
 });
 
-//agachamento
-
-document.addEventListener("keydown", (event) => {
-    if (event.key.toLowerCase() === "s") {
-        console.log("Agachou!");
-    }
+window.addEventListener("blur", function () {
+    window.controlesJogo.esquerda = false;
+    window.controlesJogo.direita = false;
 });
-
-//movimentação horizontal
-
-let x = 100;
-const velocidade = 5;
-const teclas = {};
-
-document.addEventListener("keydown", (event) => {
-    const tecla = event.key.toLowerCase();
-
-    if (["a", "d"].includes(tecla)) {
-        event.preventDefault();
-        teclas[tecla] = true;
-    }
-});
-
-document.addEventListener("keyup", (event) => {
-    teclas[event.key.toLowerCase()] = false;
-});
-
-function atualizar() {
-    if (teclas["d"]) x += velocidade;
-    if (teclas["a"]) x -= velocidade;
-
-    personagem.style.left = `${x}px`;
-
-    requestAnimationFrame(atualizar);
-}
-
-atualizar();
-
