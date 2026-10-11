@@ -2,39 +2,49 @@
     position: absolute;
     width: 60px;
     height: 100px;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    transform: none;
+    box-sizing: border-box;
 }
 
 .cabeca {
     width: 35px;
     height: 35px;
-    background: #FFD166;
-    border-radius: 8px;
-    margin: auto;
+    margin: 0 auto;
+    background: #f4c542;
+    border: 2px solid #222;
+    border-radius: 6px;
+    box-sizing: border-box;
 }
 
 .corpo {
     width: 45px;
     height: 35px;
-    background: #00F5D4;
-    margin: auto;
-    border-radius: 6px;
+    margin: 0 auto;
+    background: #00d9ff;
+    border: 2px solid #222;
+    box-sizing: border-box;
 }
 
 .braco {
-    width: 60px;
-    height: 10px;
-    background: #FF3B7F;
     position: absolute;
     top: 42px;
-    border-radius: 5px;
+    left: 0;
+    width: 60px;
+    height: 10px;
+    background: #ff6b9d;
+    border: 2px solid #222;
+    box-sizing: border-box;
 }
 
 .perna {
-    width: 12px;
-    height: 30px;
-    background: #2D1B69;
     position: absolute;
     bottom: 0;
     left: 12px;
-    box-shadow: 24px 0 #2D1B69;
-}
+    width: 12px;
+    height: 30px;
+    background: #563d7c;
+    border: 2px solid #222;
+    box-shadow: 24px 0 0 -2px #563d7c;
