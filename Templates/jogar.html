@@ -3,21 +3,23 @@
 
 <head>
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Meu jogo de plataforma</title>
 
     <link rel="stylesheet" href="../Static/css/All.css">
     <link rel="stylesheet" href="../Static/css/jogo/personagem.css">
     <link rel="stylesheet" href="../Static/css/jogo/movimentacao.css">
-
-</head>
-
+    <link rel="stylesheet" href="../Static/css/jogo/obstaculos/serra.css">
+    <link rel="stylesheet" href="../Static/css/jogo/obstaculos/espinhos.css">
+    <link rel="stylesheet" href="../Static/css/jogo/fases.css">
+</head>d
 <body>
 
     <main class="jogo" id="jogo">
+
+        <!-- Fundo cyberpunk -->
+        <div class="fundo-jogo" aria-hidden="true"></div>
 
         <!-- Interface do jogo -->
         <div class="hud">
@@ -30,10 +32,10 @@
 
         <!-- Personagem -->
         <div class="personagem" id="personagem">
-            <div class="cabeca"></div>
-            <div class="corpo"></div>
-            <div class="braco"></div>
-            <div class="perna"></div>
+            <img
+                id="spritePersonagem"
+                src="../Static/img/Parado.gif"
+                alt="Personagem">
         </div>
 
         <!-- Plataformas suspensas -->
@@ -45,6 +47,18 @@
              style="left: 400px; bottom: 180px; width: 140px;">
         </div>
 
+        <!-- Espinhos -->
+        <div class="espinhos" style="left: 200px; top: 340px;">
+            <img src="../Static/img/Espinhos.gif" alt="Espinhos">
+        </div>
+
+        <!-- Serra giratória -->
+        <div class="serra" style="left: 340px; top: 200px;">
+            <img src="../Static/img/SerraGiratoria.gif"
+                 alt="Serra giratória">
+        </div>
+
+        <!-- Plataforma final -->
         <div class="plataforma"
              style="left: 590px; bottom: 100px; width: 100px;">
         </div>
@@ -54,6 +68,9 @@
 
     </main>
 
-    <script src="../Static/js/jogo/Movimentacao.js"></script>
-    <script src="../Static/js/jogo/Fisica.js"></script>
+    <script src="../Static/js/jogo/Movimentacao.js" defer></script>
+    <script src="../Static/js/jogo/Fisica.js" defer></script>
+    <script src="../Static/js/jogo/Animacao.js" defer></script>
+
 </body>
+</html>

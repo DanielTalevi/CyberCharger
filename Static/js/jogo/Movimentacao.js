@@ -1,32 +1,44 @@
 
-window.controlesJogo = {
+/* =========================================
+   MOVIMENTAÇÃO DO JOGADOR
+   Responsabilidade: controles do teclado
+========================================= */
+
+window.controlesJogo = window.controlesJogo || {
     esquerda: false,
     direita: false,
     puloSolicitado: false
 };
 
+const controles = window.controlesJogo;
+
 document.addEventListener("keydown", function (evento) {
     const tecla = evento.key.toLowerCase();
 
-    if (["a", "d", "w", " "].includes(tecla)) {
+    const teclasDoJogo = [
+        "a", "d", "w",
+        "arrowleft", "arrowright", "arrowup", " "
+    ];
+
+    if (teclasDoJogo.includes(tecla)) {
         evento.preventDefault();
     }
 
     if (tecla === "a" || tecla === "arrowleft") {
-        window.controlesJogo.esquerda = true;
+        controles.esquerda = true;
     }
 
     if (tecla === "d" || tecla === "arrowright") {
-        window.controlesJogo.direita = true;
+        controles.direita = true;
     }
 
     if (
         (tecla === "w" ||
-        tecla === "arrowup" ||
-        tecla === " ") &&
+         tecla === "arrowup" ||
+         tecla === " ") &&
         !evento.repeat
     ) {
-        window.controlesJogo.puloSolicitado = true;
+        controles.puloSolicitado = true;
     }
 });
 
@@ -34,15 +46,16 @@ document.addEventListener("keyup", function (evento) {
     const tecla = evento.key.toLowerCase();
 
     if (tecla === "a" || tecla === "arrowleft") {
-        window.controlesJogo.esquerda = false;
+        controles.esquerda = false;
     }
 
     if (tecla === "d" || tecla === "arrowright") {
-        window.controlesJogo.direita = false;
+        controles.direita = false;
     }
 });
 
 window.addEventListener("blur", function () {
-    window.controlesJogo.esquerda = false;
-    window.controlesJogo.direita = false;
+    controles.esquerda = false;
+    controles.direita = false;
+    controles.puloSolicitado = false;
 });

@@ -1,20 +1,30 @@
 
+/* =========================================
+   FÍSICA DO JOGADOR
+   Responsabilidade:
+   - Movimento horizontal
+   - Gravidade e pulo
+   - Colisões com plataformas
+   - Posicionamento do personagem
+========================================= */
+
 const jogo = document.querySelector("#jogo");
 const personagem = document.querySelector("#personagem");
 const chao = document.querySelector("#chao");
-const controles = window.controlesJogo;
+const controlesFisica = window.controlesJogo;
 
-if (!jogo || !personagem || !chao || !controles) {
+if (!jogo || !personagem || !chao || !controlesFisica) {
     throw new Error(
-        "Não foi possível encontrar o jogo, o personagem, o chão ou os controles."
+        "Não foi possível encontrar o jogo, o personagem, o chão ou os controles. Verifique o HTML e a ordem dos scripts."
     );
 }
 
+// A dimensão física acompanha o CSS do personagem.
 const jogador = {
     x: 50,
     y: 0,
-    largura: 60,
-    altura: 100,
+    largura: personagem.offsetWidth,
+    altura: personagem.offsetHeight,
     velocidadeX: 240,
     velocidadeY: 0,
     forcaPulo: 550,
@@ -26,6 +36,10 @@ const plataformas = [
     ...document.querySelectorAll(".plataforma"),
     chao
 ];
+
+/* =========================================
+   RETÂNGULOS DE COLISÃO
+========================================= */
 
 function obterRetangulo(elemento) {
     const jogoRect = jogo.getBoundingClientRect();
@@ -48,39 +62,64 @@ function retanguloJogador(x, y) {
     };
 }
 
+/* =========================================
+   MOVIMENTO HORIZONTAL
+========================================= */
+
 function moverHorizontal(deltaTempo) {
     let direcao = 0;
 
-    if (controles.esquerda) direcao--;
-    if (controles.direita) direcao++;
+    if (controlesFisica.esquerda) direcao--;
+    if (controlesFisica.direita) direcao++;
+
+    if (direcao === 0) return;
 
     const anteriorX = jogador.x;
 
     jogador.x += direcao * jogador.velocidadeX * deltaTempo;
 
+    // Limites laterais do cenário.
     jogador.x = Math.max(
         0,
-        Math.min(jogador.x, jogo.clientWidth - jogador.largura)
+        Math.min(
+            jogador.x,
+            Math.max(0, jogo.clientWidth - jogador.largura)
+        )
     );
 
+    // Impede atravessar as laterais das plataformas.
     for (const plataforma of plataformas) {
         const obstaculo = obterRetangulo(plataforma);
-        const jogadorRect = retanguloJogador(jogador.x, jogador.y);
+        const jogadorRect = retanguloJogador(
+            jogador.x,
+            jogador.y
+        );
 
-        if (
+        const colidiu =
             jogadorRect.top < obstaculo.bottom &&
             jogadorRect.bottom > obstaculo.top &&
             jogadorRect.left < obstaculo.right &&
-            jogadorRect.right > obstaculo.left
+            jogadorRect.right > obstaculo.left;
+
+        if (!colidiu) continue;
+
+        if (
+            direcao > 0 &&
+            anteriorX + jogador.largura <= obstaculo.left + 2
         ) {
-            if (direcao > 0 && anteriorX + jogador.largura <= obstaculo.left + 2) {
-                jogador.x = obstaculo.left - jogador.largura;
-            } else if (direcao < 0 && anteriorX >= obstaculo.right - 2) {
-                jogador.x = obstaculo.right;
-            }
+            jogador.x = obstaculo.left - jogador.largura;
+        } else if (
+            direcao < 0 &&
+            anteriorX >= obstaculo.right - 2
+        ) {
+            jogador.x = obstaculo.right;
         }
     }
 }
+
+/* =========================================
+   MOVIMENTO VERTICAL
+========================================= */
 
 function moverVertical(deltaTempo) {
     const yAnterior = jogador.y;
@@ -105,7 +144,7 @@ function moverVertical(deltaTempo) {
 
         const fundoAtual = jogador.y + jogador.altura;
 
-        // Aterrissagem: o jogador está caindo sobre uma plataforma.
+        // Aterrissagem sobre a superfície.
         if (
             jogador.velocidadeY >= 0 &&
             fundoAnterior <= obstaculo.top &&
@@ -116,7 +155,7 @@ function moverVertical(deltaTempo) {
             jogador.noChao = true;
         }
 
-        // Cabeça bate na parte inferior de uma plataforma.
+        // Colisão da cabeça com o fundo da plataforma.
         else if (
             jogador.velocidadeY < 0 &&
             yAnterior >= obstaculo.bottom &&
@@ -127,7 +166,7 @@ function moverVertical(deltaTempo) {
         }
     }
 
-    // Limite superior da área de jogo.
+    // Impede ultrapassar o topo da área de jogo.
     if (jogador.y < 0) {
         jogador.y = 0;
 
@@ -137,24 +176,40 @@ function moverVertical(deltaTempo) {
     }
 }
 
+/* =========================================
+   ATUALIZAÇÃO DA FÍSICA
+========================================= */
+
 function atualizarFisica(deltaTempo) {
     moverHorizontal(deltaTempo);
 
-    // O pulo só começa se o jogador estiver apoiado em uma superfície.
-    if (controles.puloSolicitado && jogador.noChao) {
+    // O pulo só é executado quando há apoio.
+    if (
+        controlesFisica.puloSolicitado &&
+        jogador.noChao
+    ) {
         jogador.velocidadeY = -jogador.forcaPulo;
         jogador.noChao = false;
     }
 
-    controles.puloSolicitado = false;
+    // Consome o comando de pulo deste ciclo.
+    controlesFisica.puloSolicitado = false;
 
     moverVertical(deltaTempo);
 }
+
+/* =========================================
+   DESENHO DO PERSONAGEM
+========================================= */
 
 function desenharJogador() {
     personagem.style.left = `${jogador.x}px`;
     personagem.style.top = `${jogador.y}px`;
 }
+
+/* =========================================
+   POSIÇÃO INICIAL
+========================================= */
 
 function posicionarNoChao() {
     const topoChao = obterRetangulo(chao).top;
@@ -163,6 +218,10 @@ function posicionarNoChao() {
     jogador.velocidadeY = 0;
     jogador.noChao = true;
 }
+
+/* =========================================
+   LOOP PRINCIPAL
+========================================= */
 
 let ultimoTempo = 0;
 
@@ -178,12 +237,22 @@ function loop(tempoAtual) {
 
     ultimoTempo = tempoAtual;
 
+
     atualizarFisica(deltaTempo);
     desenharJogador();
 
+    // Atualiza a animação usando o estado real da física.
+    atualizarAnimacao(jogador, controlesFisica);
+
     requestAnimationFrame(loop);
+
 }
+
+/* =========================================
+   INICIALIZAÇÃO
+========================================= */
 
 posicionarNoChao();
 desenharJogador();
-requestAnimationFrame(loop); 
+
+requestAnimationFrame(loop);
