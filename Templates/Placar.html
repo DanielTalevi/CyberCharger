@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberCharger - TOP 10</title>
+    <style>
+        body {
+            background: #101820;
+            color: #e8ede8;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 30px 16px;
+        }
+
+        h1 {
+            color: #d6b84c;
+        }
+
+        table {
+            margin: 24px auto;
+            width: 100%;
+            max-width: 500px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #0b5a43;
+            padding: 12px;
+        }
+
+        th {
+            background: #063f30;
+        }
+
+        a {
+            color: #d6b84c;
+        }
+    </style>
+</head>
+<body>
+    <h1>CYBERCHARGER</h1>
+    <h2>TOP 10 JOGADORES</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Posição</th>
+                <th>Jogador</th>
+                <th>Pontos</th>
+            </tr>
+        </thead>
+        <tbody id="lista-placar"></tbody>
+    </table>
+
+    <p id="mensagem"></p>
+
+    <a href="jogar.html">Voltar ao jogo</a>
+
+    <script src="../Static/js/jogo/Placar.js"></script>
+    <script>
+        const lista = document.querySelector("#lista-placar");
+        const mensagem = document.querySelector("#mensagem");
+        const pontuacoes = window.Placar.listar();
+
+        if (pontuacoes.length === 0) {
+            mensagem.textContent = "Nenhuma pontuação registrada ainda.";
+        }
+
+        pontuacoes.forEach((item, indice) => {
+            const linha = document.createElement("tr");
+
+            const posicao = document.createElement("td");
+            posicao.textContent = indice + 1;
+
+            const nome = document.createElement("td");
+            nome.textContent = item.nome;
+
+            const pontos = document.createElement("td");
+            pontos.textContent = item.pontos;
+
+            linha.append(posicao, nome, pontos);
+            lista.appendChild(linha);
+        });
+    </script>
+</body>
+</html>

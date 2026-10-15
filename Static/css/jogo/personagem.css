@@ -14,3 +14,32 @@
     transform-origin: center;
 }
 
+
+.personagem.recebendo-dano {
+    animation: piscarDano 0.12s steps(2, start) infinite;
+}
+
+@keyframes piscarDano {
+    to {
+        visibility: hidden;
+    }
+}
+
+.mensagem-game-over {
+    position: absolute;
+    inset: 0;
+    z-index: 100;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(8, 0, 25, 0.85);
+    color: #ff2fcb;
+
+    font-size: clamp(28px, 6vw, 56px);
+    font-weight: bold;
+    text-shadow: 0 0 12px #ff00cc;
+
+    pointer-events: all;
+}

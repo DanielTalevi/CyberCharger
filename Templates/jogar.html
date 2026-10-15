@@ -13,15 +13,11 @@
     <link rel="stylesheet" href="../Static/css/jogo/obstaculos/serra.css">
     <link rel="stylesheet" href="../Static/css/jogo/obstaculos/espinhos.css">
     <link rel="stylesheet" href="../Static/css/jogo/fases.css">
-</head>d
+</head>
+
 <body>
 
-    <main class="jogo" id="jogo">
-
-        <!-- Fundo cyberpunk -->
-        <div class="fundo-jogo" aria-hidden="true"></div>
-
-        <!-- Interface do jogo -->
+            <!-- Interface do jogo -->
         <div class="hud">
             <span>FASE 1</span>
 
@@ -30,21 +26,22 @@
             </span>
         </div>
 
+
+    <main class="jogo" id="jogo">
+
+        <!-- Fundo cyberpunk -->
+        <div class="fundo-jogo" aria-hidden="true"></div>
+
         <!-- Personagem -->
         <div class="personagem" id="personagem">
-            <img
-                id="spritePersonagem"
-                src="../Static/img/Parado.gif"
-                alt="Personagem">
+            <img id="spritePersonagem" src="../Static/img/Parado.gif" alt="Personagem">
         </div>
 
         <!-- Plataformas suspensas -->
-        <div class="plataforma"
-             style="left: 180px; bottom: 110px; width: 140px;">
+        <div class="plataforma" style="left: 180px; bottom: 110px; width: 140px;">
         </div>
 
-        <div class="plataforma"
-             style="left: 400px; bottom: 180px; width: 140px;">
+        <div class="plataforma" style="left: 400px; bottom: 180px; width: 140px;">
         </div>
 
         <!-- Espinhos -->
@@ -54,13 +51,11 @@
 
         <!-- Serra giratória -->
         <div class="serra" style="left: 340px; top: 200px;">
-            <img src="../Static/img/SerraGiratoria.gif"
-                 alt="Serra giratória">
+            <img src="../Static/img/SerraGiratoria.gif" alt="Serra giratória">
         </div>
 
         <!-- Plataforma final -->
-        <div class="plataforma"
-             style="left: 590px; bottom: 100px; width: 100px;">
+        <div class="plataforma" style="left: 590px; bottom: 100px; width: 100px;">
         </div>
 
         <!-- Chão -->
@@ -68,9 +63,13 @@
 
     </main>
 
+
     <script src="../Static/js/jogo/Movimentacao.js" defer></script>
     <script src="../Static/js/jogo/Fisica.js" defer></script>
     <script src="../Static/js/jogo/Animacao.js" defer></script>
+    <script src="../Static/js/jogo/Placar.js" defer></script>
+    <script src="../Static/js/jogo/Dano.js" defer></script>
 
 </body>
+
 </html>

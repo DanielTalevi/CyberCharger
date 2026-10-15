@@ -240,7 +240,7 @@ function loop(tempoAtual) {
 
     atualizarFisica(deltaTempo);
     desenharJogador();
-
+    atualizarDano();
     // Atualiza a animação usando o estado real da física.
     atualizarAnimacao(jogador, controlesFisica);
 
